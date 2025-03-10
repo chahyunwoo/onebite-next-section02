@@ -1,12 +1,31 @@
 import SearchableLayout from "@/widgets/SearchableLayout/SearchableLayout";
 import styles from "./index.module.css";
 import BookItem from "@/entities/book/ui/BookItem";
-import { InferGetServerSidePropsType } from "next";
+import { InferGetStaticPropsType } from "next";
 import { fetchBooks, fetchRandomBooks } from "@/entities/book/api/book.api";
 
 // 해당 페이지는 해당 함수를 선언함으로서, SSR로 동작하게 됨
 // 컴포넌트보다 먼저 실행되어, 컴포넌트에 필요한 데이터를 불러옴
+/*
 export const getServerSideProps = async () => {
+  const [allBooks, recommendedBooks] = await Promise.all([
+    fetchBooks(),
+    fetchRandomBooks(),
+  ]);
+
+  return {
+    props: {
+      allBooks,
+      recommendedBooks,
+    },
+  };
+};
+*/
+
+// 해당 페이지는 해당 함수를 선언함으로서, SSG로 동작하게 됨
+export const getStaticProps = async () => {
+  console.log("index page getStaticProps");
+
   const [allBooks, recommendedBooks] = await Promise.all([
     fetchBooks(),
     fetchRandomBooks(),
@@ -23,7 +42,7 @@ export const getServerSideProps = async () => {
 export default function Home({
   allBooks,
   recommendedBooks,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <div className={styles.container}>
       <section>
