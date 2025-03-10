@@ -1,7 +1,6 @@
 import Link from "next/link";
 import styles from "./Layout.module.css";
 
-Link;
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className={styles.container}>
