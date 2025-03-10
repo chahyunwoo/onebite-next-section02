@@ -1,12 +1,23 @@
 import SearchableLayout from "@/widgets/SearchableLayout/SearchableLayout";
 import styles from "./index.module.css";
-
+import books from "@/mock/books.json";
+import BookItem from "@/entities/book/ui/BookItem";
 export default function Home() {
   return (
-    <>
-      <h1 className={styles.h1}>INDEX</h1>
-      <h2 className={styles.h2}>H2</h2>
-    </>
+    <div className={styles.container}>
+      <section>
+        <h3>지금 추천하는 도서</h3>
+        {books.map((book) => (
+          <BookItem key={book.id} {...book} />
+        ))}
+      </section>
+      <section>
+        <h3>등록된 모든 도서</h3>
+        {books.map((book) => (
+          <BookItem key={book.id} {...book} />
+        ))}
+      </section>
+    </div>
   );
 }
 
